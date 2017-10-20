@@ -1,23 +1,20 @@
 'use strict';
 
-const fs = require('fs')
-const path = require('path')
-const mongoose = require('mongoose')
+const fs = require('fs');
+const path = require('path');
+const mongoose = require('mongoose');
 
-const db = 'mongodb://localhost/test'
+const db = 'mongodb://localhost/test';
 
-/**
- * mongoose连接数据库
- * @type {[type]}
- */
-mongoose.Promise = require('bluebird')
-mongoose.connect(db, {useMongoClient: true})
+/* 连接数据库 */
+mongoose.Promise = require('bluebird');
+mongoose.connect(db, {useMongoClient: true});
 
 /**
  * 获取数据库表对应的js对象所在的路径
  * @type {[type]}
  */
-const models_path = path.join(__dirname, '/app/models')
+const models_path = path.join(__dirname, '/app/models');
 
 
 /**
@@ -39,19 +36,19 @@ let walk = function (modelPath) {
             walk(filePath)
         }
     })
-}
-walk(models_path)
+};
+walk(models_path);
 
-require('babel-register')
-const Koa = require('koa')
-const logger = require('koa-logger')
-const session = require('koa-session')
-const bodyParser = require('koa-bodyparser')
-const app = new Koa()
+require('babel-register');
+const Koa = require('koa');
+const logger = require('koa-logger');
+const session = require('koa-session');
+const bodyParser = require('koa-bodyparser');
+const app = new Koa();
 
-app.use(logger())
-app.use(session(app))
-app.use(bodyParser())
+app.use(logger());
+app.use(session(app));
+app.use(bodyParser());
 
 
 /**
